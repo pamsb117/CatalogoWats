@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abarrotes y Antojitos Don Aurelio – Oaxaca de Juárez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --text: #1A0E05;
+      --text-muted: #6B5B4E;
+      --border: rgba(44,26,14,0.12);
+      --brown-dark: #2C1A0E;
+      --brown-mid: #7C3E12;
+      --brown-light: #C17C3A;
+      --cream: #F5E6C8;
+      --cream-muted: #D4B896;
+      --green: #3B6D11;
+      --green-wa: #25D366;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: clamp(1rem, 4vw, 2rem);
+      padding-bottom: 100px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--brown-dark);
+      color: var(--cream);
+      padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 5vw, 2.5rem);
+      border-radius: var(--radius-lg);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: clamp(120px, 28vw, 220px);
+      height: clamp(120px, 28vw, 220px);
+      border-radius: 50%;
+      background: var(--brown-mid);
+      opacity: 0.35;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 80px;
+      width: clamp(80px, 20vw, 150px);
+      height: clamp(80px, 20vw, 150px);
+      border-radius: 50%;
+      background: var(--brown-light);
+      opacity: 0.2;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-tag { font-size: clamp(9px,2vw,11px); font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--brown-light); margin-bottom:.6rem; }
+    .hero-title { font-family:'Merriweather',serif; font-size:clamp(26px,6vw,44px); font-weight:700; line-height:1.2; color:var(--cream); margin-bottom:.5rem; }
+    .hero-sub { font-size:clamp(13px,2.5vw,15px); font-weight:300; color:var(--cream-muted); font-style:italic; }
+    .hero-badge { display:inline-block; background:var(--brown-mid); color:var(--cream); font-size:clamp(10px,2vw,12px); letter-spacing:1px; padding:5px 14px; border-radius:20px; margin-top:1rem; }
+
+    /* ── Filters ── */
+    .filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .flt { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:7px 16px; font-size:clamp(12px,2.5vw,13px); font-family:'Lato',sans-serif; cursor:pointer; color:var(--text-muted); transition:all .2s; white-space:nowrap; }
+    .flt.on { background:var(--brown-dark); color:var(--cream); border-color:var(--brown-dark); }
+    .flt:hover:not(.on) { border-color:var(--brown-light); color:var(--text); }
+
+    /* ── Featured ── */
+    .featured { background:var(--brown-dark); border-radius:var(--radius-lg); padding:clamp(1rem,3vw,1.75rem) clamp(1.25rem,3vw,2rem); display:flex; align-items:center; gap:clamp(1rem,3vw,2rem); margin-bottom:1.75rem; color:var(--cream); }
+    .feat-emoji { font-size:clamp(40px,9vw,64px); flex-shrink:0; }
+    .feat-tag { font-size:clamp(9px,2vw,10px); font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--brown-light); margin-bottom:4px; }
+    .feat-name { font-family:'Merriweather',serif; font-size:clamp(17px,4vw,24px); font-weight:700; line-height:1.3; margin-bottom:6px; }
+    .feat-desc { font-size:clamp(12px,2.5vw,13px); font-weight:300; color:var(--cream-muted); font-style:italic; margin-bottom:12px; line-height:1.6; }
+    .feat-price { font-family:'Merriweather',serif; font-size:clamp(20px,4vw,26px); font-weight:700; }
+    .feat-price small { font-size:clamp(11px,2vw,13px); font-weight:300; color:var(--cream-muted); }
+    .feat-add { background:var(--brown-light); color:#fff; border:none; border-radius:var(--radius-md); padding:8px 20px; font-family:'Lato',sans-serif; font-size:13px; font-weight:700; cursor:pointer; margin-top:12px; transition:background .2s; display:inline-block; }
+    .feat-add:hover { background:#a8622a; }
+
+    /* ── Section label ── */
+    .sec-label { font-size:clamp(9px,2vw,11px); font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--brown-mid); margin-bottom:1rem; padding-bottom:.5rem; border-bottom:1px solid rgba(193,124,58,.25); }
+
+    /* ── Grid ── */
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr)); gap:clamp(.75rem,2vw,1.25rem); margin-bottom:2rem; }
+
+    /* ── Card ── */
+    .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:border-color .2s,transform .15s; }
+    .card:hover { border-color:var(--brown-light); transform:translateY(-2px); }
+    .card-img { height:clamp(100px,18vw,150px); display:flex; align-items:center; justify-content:center; font-size:clamp(38px,9vw,56px); position:relative; }
+    .cbadge { position:absolute; top:8px; right:8px; background:var(--brown-mid); color:var(--cream); font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; }
+    .cbadge.new { background:var(--green); }
+    .card-body { padding:clamp(.65rem,2vw,.9rem) clamp(.75rem,2vw,1rem) clamp(.75rem,2vw,1rem); }
+    .card-cat { font-size:clamp(9px,2vw,10px); font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--brown-light); margin-bottom:4px; }
+    .card-name { font-family:'Merriweather',serif; font-size:clamp(13px,3vw,14px); font-weight:700; margin:0 0 5px; line-height:1.4; color:var(--text); }
+    .card-desc { font-size:clamp(11px,2vw,12px); font-weight:300; color:var(--text-muted); margin:0 0 10px; line-height:1.5; font-style:italic; }
+    .card-footer { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+    .price { font-family:'Merriweather',serif; font-size:clamp(15px,3.5vw,18px); font-weight:700; color:var(--text); }
+    .price small { font-size:clamp(9px,2vw,11px); font-weight:300; color:var(--text-muted); }
+
+    /* ── Add button with qty ── */
+    .qty-ctrl { display:flex; align-items:center; gap:0; flex-shrink:0; }
+    .qty-ctrl.hidden-ctrl { display:none; }
+    .add-btn { background:var(--brown-dark); color:var(--cream); border:none; border-radius:var(--radius-md); padding:6px clamp(10px,2vw,14px); font-family:'Lato',sans-serif; font-size:clamp(11px,2vw,12px); font-weight:700; cursor:pointer; transition:background .2s; white-space:nowrap; flex-shrink:0; }
+    .add-btn:hover { background:var(--brown-mid); }
+    .qty-box { display:none; align-items:center; gap:4px; background:var(--brown-dark); border-radius:var(--radius-md); padding:4px 6px; }
+    .qty-box.show { display:flex; }
+    .qty-btn { background:none; border:none; color:var(--cream); font-size:16px; font-weight:700; cursor:pointer; width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:4px; transition:background .15s; line-height:1; }
+    .qty-btn:hover { background:rgba(255,255,255,.15); }
+    .qty-num { color:var(--cream); font-family:'Lato',sans-serif; font-size:13px; font-weight:700; min-width:18px; text-align:center; }
+
+    /* ── Footer ── */
+    .foot { text-align:center; padding:1.5rem 0 1rem; border-top:1px solid var(--border); margin-top:.5rem; }
+    .foot p { font-size:clamp(12px,2.5vw,13px); color:var(--text-muted); line-height:2; }
+    .foot strong { color:var(--brown-mid); }
+
+    /* ── Carrito flotante ── */
+    .cart-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--brown-dark);
+      color: var(--cream);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(44,26,14,.35);
+      transition: background .2s, transform .15s;
+      z-index: 1000;
+    }
+    .cart-fab:hover { background: var(--brown-mid); transform: translateY(-2px); }
+    .cart-fab .fab-icon { font-size: 20px; }
+    .cart-fab .fab-count {
+      background: var(--brown-light);
+      color: #fff;
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+    .cart-fab.empty { opacity: 0.45; pointer-events: none; }
+
+    /* ── Panel del carrito ── */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      z-index: 1100;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .cart-overlay.open { display: flex; }
+
+    @media (min-width: 600px) {
+      .cart-overlay { align-items: center; }
+    }
+
+    .cart-panel {
+      background: var(--surface);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 520px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    @media (min-width: 600px) {
+      .cart-panel { border-radius: 20px; max-height: 80vh; }
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cart-title { font-family:'Merriweather',serif; font-size: 18px; font-weight:700; color:var(--text); }
+    .cart-close { background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-muted); line-height:1; padding:4px; border-radius:6px; }
+    .cart-close:hover { background: var(--bg); }
+
+    .cart-body { flex:1; overflow-y:auto; padding:1rem 1.5rem; }
+
+    .cart-empty { text-align:center; padding: 2.5rem 1rem; color:var(--text-muted); }
+    .cart-empty .empty-icon { font-size:48px; margin-bottom:.75rem; }
+    .cart-empty p { font-size:14px; font-style:italic; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .ci-emoji { font-size: 28px; flex-shrink:0; width:36px; text-align:center; }
+    .ci-info { flex:1; min-width:0; }
+    .ci-name { font-family:'Merriweather',serif; font-size:13px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ci-unit { font-size:11px; color:var(--text-muted); margin-top:2px; }
+    .ci-controls { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+    .ci-qty-btn { background:var(--bg); border:1px solid var(--border); border-radius:6px; width:28px; height:28px; font-size:16px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--text); transition:background .15s; }
+    .ci-qty-btn:hover { background:var(--brown-light); color:#ffffff; border-color:var(--brown-light); }
+    .ci-qty { font-family:'Lato',sans-serif; font-size:14px; font-weight:700; min-width:20px; text-align:center; }
+    .ci-price { font-family:'Merriweather',serif; font-size:14px; font-weight:700; color:var(--brown-mid); min-width:52px; text-align:right; flex-shrink:0; }
+
+    .cart-footer {
+      padding: 1rem 1.5rem 1.25rem;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+    .cart-total-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1rem; }
+    .cart-total-label { font-size:14px; color:var(--text-muted); }
+    .cart-total-val { font-family:'Merriweather',serif; font-size:22px; font-weight:700; color:var(--text); }
+
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--green-wa);
+      color: #ececec;
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      text-decoration: none;
+    }
+    .wa-btn:hover { background: #1ebe59; transform: translateY(-1px); }
+    .wa-btn svg { width:22px; height:22px; flex-shrink:0; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="hero">
+      <div class="hero-inner">
+        <p class="hero-tag">Oaxaca de Juárez · Desde 1987</p>
+        <h1 class="hero-title">Abarrotes &<br>Antojitos<br>Don Aurelio</h1>
+        <p class="hero-sub">Lo mejor del mercado, a tu puerta</p>
+        <span class="hero-badge">📍 Mercado de Abastos, Local 214</span>
+      </div>
+    </div>
+
+    <div class="filters">
+      <button class="flt on" onclick="filtrar(this,'todos')">Todos</button>
+      <button class="flt" onclick="filtrar(this,'abarrotes')">Abarrotes</button>
+      <button class="flt" onclick="filtrar(this,'antojitos')">Antojitos</button>
+      <button class="flt" onclick="filtrar(this,'bebidas')">Bebidas</button>
+      <button class="flt" onclick="filtrar(this,'dulces')">Dulces &amp; Botanas</button>
+      <button class="flt" onclick="filtrar(this,'regional')">Regional</button>
+    </div>
+
+    <!-- Featured -->
+    <div class="featured" id="feat" data-cat="regional">
+      <div class="feat-emoji">🫙</div>
+      <div>
+        <p class="feat-tag">Producto estrella</p>
+        <h2 class="feat-name">Mole Negro Artesanal</h2>
+        <p class="feat-desc">Receta de la abuela, con chilhuacle negro, mulato y más de 30 ingredientes.</p>
+        <span class="feat-price">$120 <small>/ frasco 400g</small></span><br>
+        <button class="feat-add" onclick="agregarDesdeHero()">+ Agregar al carrito</button>
+      </div>
+    </div>
+
+    <p class="sec-label">Nuestros productos</p>
+
+    <div class="grid" id="grid">
+
+      <div class="card" data-cat="antojitos" data-name="Tlayuda con tasajo" data-price="55" data-emoji="🫔">
+        <div class="card-img" style="background:#FFF8F0;">🫔<span class="cbadge new">Nuevo</span></div>
+        <div class="card-body">
+          <p class="card-cat">Antojitos</p>
+          <h3 class="card-name">Tlayuda con tasajo</h3>
+          <p class="card-desc">Tortilla grande con frijoles, quesillo y tasajo oaxaqueño.</p>
+          <div class="card-footer">
+            <span class="price">$55</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="antojitos" data-name="Tamales oaxaqueños" data-price="25" data-emoji="🌽">
+        <div class="card-img" style="background:#F0FAF2;">🌽</div>
+        <div class="card-body">
+          <p class="card-cat">Antojitos</p>
+          <h3 class="card-name">Tamales oaxaqueños</h3>
+          <p class="card-desc">Envueltos en hoja de plátano, rellenos de mole negro o rajas.</p>
+          <div class="card-footer">
+            <span class="price">$25</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="bebidas" data-name="Atole de guayaba" data-price="20" data-emoji="🍵">
+        <div class="card-img" style="background:#FFF0F5;">🍵</div>
+        <div class="card-body">
+          <p class="card-cat">Bebidas</p>
+          <h3 class="card-name">Atole de guayaba</h3>
+          <p class="card-desc">Bebida caliente tradicional, hecha al momento.</p>
+          <div class="card-footer">
+            <span class="price">$20</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="regional" data-name="Quesillo artesanal" data-price="80" data-emoji="🧀">
+        <div class="card-img" style="background:#FFF8E8;">🧀<span class="cbadge">Popular</span></div>
+        <div class="card-body">
+          <p class="card-cat">Regional</p>
+          <h3 class="card-name">Quesillo artesanal</h3>
+          <p class="card-desc">Queso de hebra fresco, traído directo de Etla.</p>
+          <div class="card-footer">
+            <span class="price">$80 <small>/ 250g</small></span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="abarrotes" data-name="Aceite vegetal 1L" data-price="42" data-emoji="🫒">
+        <div class="card-img" style="background:#F5F5F0;">🫒</div>
+        <div class="card-body">
+          <p class="card-cat">Abarrotes</p>
+          <h3 class="card-name">Aceite vegetal 1L</h3>
+          <p class="card-desc">Marca popular, calidad garantizada para cocinar.</p>
+          <div class="card-footer">
+            <span class="price">$42</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="dulces" data-name="Chapulines con chile" data-price="30" data-emoji="🍬">
+        <div class="card-img" style="background:#FFF0E8;">🍬<span class="cbadge">Oferta</span></div>
+        <div class="card-body">
+          <p class="card-cat">Dulces &amp; Botanas</p>
+          <h3 class="card-name">Chapulines con chile</h3>
+          <p class="card-desc">Botana típica oaxaqueña, tostaditos y bien sazonados.</p>
+          <div class="card-footer">
+            <span class="price">$30</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="bebidas" data-name="Agua de Jamaica" data-price="18" data-emoji="🧃">
+        <div class="card-img" style="background:#F0F8FF;">🧃</div>
+        <div class="card-body">
+          <p class="card-cat">Bebidas</p>
+          <h3 class="card-name">Agua de Jamaica</h3>
+          <p class="card-desc">Fresca, natural, preparada con jamaica de la región.</p>
+          <div class="card-footer">
+            <span class="price">$18</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="abarrotes" data-name="Arroz blanco 1kg" data-price="28" data-emoji="🌾">
+        <div class="card-img" style="background:#F8F5F0;">🌾</div>
+        <div class="card-body">
+          <p class="card-cat">Abarrotes</p>
+          <h3 class="card-name">Arroz blanco 1kg</h3>
+          <p class="card-desc">Grano largo, perfecto para cualquier guiso del día.</p>
+          <div class="card-footer">
+            <span class="price">$28</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="regional" data-name="Salsa de chilhuacle" data-price="65" data-emoji="🌶️">
+        <div class="card-img" style="background:#FFF3E8;">🌶️<span class="cbadge new">Nuevo</span></div>
+        <div class="card-body">
+          <p class="card-cat">Regional</p>
+          <h3 class="card-name">Salsa de chilhuacle</h3>
+          <p class="card-desc">En tarro, hecha en casa, para todo tipo de platillos.</p>
+          <div class="card-footer">
+            <span class="price">$65</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="dulces" data-name="Chocolate Mayordomo" data-price="45" data-emoji="🍫">
+        <div class="card-img" style="background:#FFFBF0;">🍫</div>
+        <div class="card-body">
+          <p class="card-cat">Dulces &amp; Botanas</p>
+          <h3 class="card-name">Chocolate Mayordomo</h3>
+          <p class="card-desc">Tablilla para chocolate caliente estilo oaxaqueño.</p>
+          <div class="card-footer">
+            <span class="price">$45</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="antojitos" data-name="Memelas con frijol" data-price="22" data-emoji="🥣">
+        <div class="card-img" style="background:#FFF5F0;">🥣</div>
+        <div class="card-body">
+          <p class="card-cat">Antojitos</p>
+          <h3 class="card-name">Memelas con frijol</h3>
+          <p class="card-desc">Tortillas gruesas de maíz con frijoles negros y salsa.</p>
+          <div class="card-footer">
+            <span class="price">$22</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="abarrotes" data-name="Huevo blanco (12 pzas)" data-price="38" data-emoji="🥚">
+        <div class="card-img" style="background:#F5F8F0;">🥚</div>
+        <div class="card-body">
+          <p class="card-cat">Abarrotes</p>
+          <h3 class="card-name">Huevo blanco (12 pzas)</h3>
+          <p class="card-desc">Cartón de huevo fresco, recolectado localmente.</p>
+          <div class="card-footer">
+            <span class="price">$38</span>
+            <div class="qty-ctrl">
+              <button class="add-btn">+ Agregar</button>
+              <div class="qty-box">
+                <button class="qty-btn" onclick="cambiarQty(this,-1)">−</button>
+                <span class="qty-num">1</span>
+                <button class="qty-btn" onclick="cambiarQty(this,1)">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="foot">
+      <p>Visítanos en el <strong>Mercado de Abastos</strong>, Oaxaca de Juárez</p>
+      <p>Lunes a sábado · 7am – 8pm</p>
+      <p>📞 <strong>(951) 123-4567</strong></p>
+    </div>
+
+  </div>
+
+  <!-- Botón flotante carrito -->
+  <button class="cart-fab empty" id="cartFab" onclick="abrirCarrito()">
+    <span class="fab-icon">🛒</span>
+    <span>Mi carrito</span>
+    <span class="fab-count" id="fabCount">0</span>
+  </button>
+
+  <!-- Overlay carrito -->
+  <div class="cart-overlay" id="cartOverlay" onclick="cerrarSiOverlay(event)">
+    <div class="cart-panel">
+      <div class="cart-header">
+        <span class="cart-title">🛒 Tu carrito</span>
+        <button class="cart-close" onclick="cerrarCarrito()">✕</button>
+      </div>
+      <div class="cart-body" id="cartBody">
+        <div class="cart-empty">
+          <div class="empty-icon">🛒</div>
+          <p>Tu carrito está vacío.<br>¡Agrega algo rico!</p>
+        </div>
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="cart-total-row">
+          <span class="cart-total-label">Total del pedido</span>
+          <span class="cart-total-val" id="cartTotal">$0</span>
+        </div>
+        <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Número de WhatsApp del negocio (sin + ni espacios) ──
+    const WA_NUMBER = '529511817882';
+
+    // ── Estado del carrito: { id: { name, price, emoji, qty } } ──
+    const carrito = {};
+
+    // ── Inicializar botones de tarjetas ──
+    document.querySelectorAll('.card').forEach(card => {
+      const addBtn  = card.querySelector('.add-btn');
+      const qtyBox  = card.querySelector('.qty-box');
+      const qtyNum  = card.querySelector('.qty-num');
+
+      addBtn.addEventListener('click', () => {
+        const id = card.dataset.name;
+        if (!carrito[id]) {
+          carrito[id] = {
+            name:  card.dataset.name,
+            price: parseInt(card.dataset.price),
+            emoji: card.dataset.emoji,
+            qty:   1
+          };
+        } else {
+          carrito[id].qty++;
+        }
+        qtyNum.textContent = carrito[id].qty;
+        addBtn.style.display = 'none';
+        qtyBox.classList.add('show');
+        actualizarFAB();
+      });
+    });
+
+    // ── Cambiar cantidad desde las tarjetas ──
+    function cambiarQty(btn, delta) {
+      const card   = btn.closest('.card');
+      const qtyBox = card.querySelector('.qty-box');
+      const addBtn = card.querySelector('.add-btn');
+      const qtyNum = card.querySelector('.qty-num');
+      const id     = card.dataset.name;
+
+      if (!carrito[id]) return;
+      carrito[id].qty += delta;
+
+      if (carrito[id].qty <= 0) {
+        delete carrito[id];
+        qtyBox.classList.remove('show');
+        addBtn.style.display = '';
+        qtyNum.textContent = '1';
+      } else {
+        qtyNum.textContent = carrito[id].qty;
+      }
+      actualizarFAB();
+    }
+
+    // ── Producto estrella ──
+    function agregarDesdeHero() {
+      const id = 'Mole Negro Artesanal';
+      if (!carrito[id]) {
+        carrito[id] = { name: id, price: 120, emoji: '🫙', qty: 1 };
+      } else {
+        carrito[id].qty++;
+      }
+      actualizarFAB();
+      const btn = document.querySelector('.feat-add');
+      btn.textContent = '✓ Agregado (' + carrito[id].qty + ')';
+      setTimeout(() => { btn.textContent = '+ Agregar al carrito'; }, 1500);
+    }
+
+    // ── Actualizar FAB ──
+    function actualizarFAB() {
+      const fab   = document.getElementById('cartFab');
+      const count = document.getElementById('fabCount');
+      const total = Object.values(carrito).reduce((s, i) => s + i.qty, 0);
+      count.textContent = total;
+      total > 0 ? fab.classList.remove('empty') : fab.classList.add('empty');
+    }
+
+    // ── Abrir / cerrar carrito ──
+    function abrirCarrito() {
+      renderCarrito();
+      document.getElementById('cartOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function cerrarCarrito() {
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function cerrarSiOverlay(e) {
+      if (e.target === document.getElementById('cartOverlay')) cerrarCarrito();
+    }
+
+    // ── Renderizar panel del carrito ──
+    function renderCarrito() {
+      const body   = document.getElementById('cartBody');
+      const footer = document.getElementById('cartFooter');
+      const items  = Object.values(carrito);
+
+      if (items.length === 0) {
+        body.innerHTML = '<div class="cart-empty"><div class="empty-icon">🛒</div><p>Tu carrito está vacío.<br>¡Agrega algo rico!</p></div>';
+        footer.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+      items.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        html += `
+          <div class="cart-item">
+            <div class="ci-emoji">${item.emoji}</div>
+            <div class="ci-info">
+              <div class="ci-name">${item.name}</div>
+              <div class="ci-unit">$${item.price} c/u</div>
+            </div>
+            <div class="ci-controls">
+              <button class="ci-qty-btn" onclick="cambiarDesdePanel('${item.name}',-1)">−</button>
+              <span class="ci-qty">${item.qty}</span>
+              <button class="ci-qty-btn" onclick="cambiarDesdePanel('${item.name}',1)">+</button>
+            </div>
+            <div class="ci-price">$${subtotal}</div>
+          </div>`;
+      });
+
+      body.innerHTML = html;
+      document.getElementById('cartTotal').textContent = '$' + total;
+      footer.style.display = 'block';
+
+      // Construir link de WhatsApp
+      let msg = '¡Hola Don Aurelio! 👋 Quisiera hacer el siguiente pedido:\n\n';
+      items.forEach(item => {
+        msg += `${item.emoji} ${item.name} × ${item.qty} = $${item.price * item.qty}\n`;
+      });
+      msg += `\n💰 *Total: $${total}*\n\n¿Está disponible? 🙏`;
+
+      const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+      document.getElementById('waBtn').href = url;
+    }
+
+    // ── Cambiar cantidad desde el panel ──
+    function cambiarDesdePanel(name, delta) {
+      if (!carrito[name]) return;
+      carrito[name].qty += delta;
+      if (carrito[name].qty <= 0) {
+        delete carrito[name];
+        // Resetear botón de la tarjeta correspondiente
+        document.querySelectorAll('.card').forEach(card => {
+          if (card.dataset.name === name) {
+            card.querySelector('.qty-box').classList.remove('show');
+            card.querySelector('.add-btn').style.display = '';
+            card.querySelector('.qty-num').textContent = '1';
+          }
+        });
+        // Mole desde hero
+        if (name === 'Mole Negro Artesanal') {
+          document.querySelector('.feat-add').textContent = '+ Agregar al carrito';
+        }
+      } else {
+        // Sincronizar tarjeta
+        document.querySelectorAll('.card').forEach(card => {
+          if (card.dataset.name === name) {
+            card.querySelector('.qty-num').textContent = carrito[name].qty;
+          }
+        });
+      }
+      actualizarFAB();
+      renderCarrito();
+    }
+
+    // ── Filtrar categorías ──
+    function filtrar(btn, cat) {
+      document.querySelectorAll('.flt').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.querySelectorAll('.card').forEach(c => {
+        (cat === 'todos' || c.dataset.cat === cat)
+          ? c.classList.remove('hidden')
+          : c.classList.add('hidden');
+      });
+      const feat = document.getElementById('feat');
+      (cat === 'todos' || cat === 'regional')
+        ? feat.classList.remove('hidden')
+        : feat.classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
